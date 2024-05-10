@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://dvdkfpodesk3l"]
+
+[ext_resource type="Script" path="res://scenes/characters/enemies/fall/fall_enemy.gd" id="1_61bb8"]
+[ext_resource type="Texture2D" uid="uid://bgjl3lkf526b5" path="res://assets/tilemap-characters_packed.png" id="1_x5h1o"]
+[ext_resource type="PackedScene" uid="uid://b0ah1ke6tlhfl" path="res://scenes/components/killzone.tscn" id="2_6px3r"]
+[ext_resource type="AudioStream" uid="uid://bt3bkwuggc7fk" path="res://assets/Retro Impact Punch Hurt 01.wav" id="4_ryry7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vq8vp"]
+size = Vector2(18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygtma"]
+atlas = ExtResource("1_x5h1o")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8acu"]
+atlas = ExtResource("1_x5h1o")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e1buo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygtma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8acu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FallEnemy" type="Node2D"]
+script = ExtResource("1_61bb8")
+
+[node name="Killzone" parent="." instance=ExtResource("2_6px3r")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("RectangleShape2D_vq8vp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e1buo")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ryry7")
+volume_db = 10.0
+max_distance = 700.0
+bus = &"SFX"

@@ -1,0 +1,151 @@
+[gd_scene load_steps=11 format=3 uid="uid://c17vtkmwrg6ji"]
+
+[ext_resource type="Script" path="res://scenes/items/flag.gd" id="1_dvnjr"]
+[ext_resource type="Texture2D" uid="uid://bsg8ij56puedd" path="res://assets/tilemap_packed.png" id="1_ssbqx"]
+[ext_resource type="AudioStream" uid="uid://e0ftob7iasd3" path="res://assets/Retro PickUp Coin 07.wav" id="3_1uyjh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlqde"]
+atlas = ExtResource("1_ssbqx")
+region = Rect2(198, 90, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ct2s"]
+atlas = ExtResource("1_ssbqx")
+region = Rect2(216, 90, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ggdg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlqde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ct2s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m3c51"]
+radius = 30.0167
+
+[sub_resource type="Animation" id="Animation_p6ibm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.572988, 0.572988, 0.572988, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_088d3"]
+resource_name = "activate"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.572988, 0.572988, 0.572988, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"default", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_syanh"]
+_data = {
+"RESET": SubResource("Animation_p6ibm"),
+"activate": SubResource("Animation_088d3")
+}
+
+[node name="Flag" type="Area2D"]
+modulate = Color(0.572988, 0.572988, 0.572988, 1)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_dvnjr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(6, -27)
+sprite_frames = SubResource("SpriteFrames_1ggdg")
+frame_progress = 0.662265
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(6, -9)
+texture = ExtResource("1_ssbqx")
+region_enabled = true
+region_rect = Rect2(198, 108, 18, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -17)
+shape = SubResource("CircleShape2D_m3c51")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_syanh")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1uyjh")
+volume_db = -3.665
+bus = &"SFX"

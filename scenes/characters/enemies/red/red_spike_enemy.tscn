@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://c1kv25rma2sn8"]
+
+[ext_resource type="Script" path="res://scenes/characters/enemies/red/red_spike_enemy.gd" id="1_7klvn"]
+[ext_resource type="Texture2D" uid="uid://bgjl3lkf526b5" path="res://assets/tilemap-characters_packed.png" id="1_awb64"]
+[ext_resource type="PackedScene" uid="uid://b0ah1ke6tlhfl" path="res://scenes/components/killzone.tscn" id="2_ivtee"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixhc7"]
+atlas = ExtResource("1_awb64")
+region = Rect2(144, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84hoh"]
+atlas = ExtResource("1_awb64")
+region = Rect2(168, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r4qhl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixhc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84hoh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ir8dm"]
+size = Vector2(15, 13)
+
+[node name="RedSpikeEnemy" type="Node2D"]
+script = ExtResource("1_7klvn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_r4qhl")
+autoplay = "default"
+frame = 1
+frame_progress = 0.717842
+
+[node name="Killzone" parent="." instance=ExtResource("2_ivtee")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-0.5, -6.5)
+shape = SubResource("RectangleShape2D_ir8dm")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(10, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(-10, 0)

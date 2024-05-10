@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccqynn0lhuxmi"]
+
+[ext_resource type="Texture2D" uid="uid://bsg8ij56puedd" path="res://assets/tilemap_packed.png" id="1_bpbs3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jeed6"]
+size = Vector2(54, 18)
+
+[node name="Platfrom" type="AnimatableBody2D"]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jeed6")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bpbs3")
+region_enabled = true
+region_rect = Rect2(18, 36, 54, 18)

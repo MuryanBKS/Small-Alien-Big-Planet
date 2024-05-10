@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3rs7u47lwxm5"]
+
+[ext_resource type="Script" path="res://scenes/items/chest_block.gd" id="1_1glid"]
+[ext_resource type="Texture2D" uid="uid://bsg8ij56puedd" path="res://assets/tilemap_packed.png" id="1_8tvdj"]
+[ext_resource type="AudioStream" uid="uid://cn4m3xsw8hc62" path="res://assets/Gate Open.wav" id="3_6mxym"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bmh4d"]
+size = Vector2(18, 18)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4el03"]
+radius = 13.0
+
+[node name="Block" type="StaticBody2D"]
+script = ExtResource("1_1glid")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bmh4d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8tvdj")
+region_enabled = true
+region_rect = Rect2(144, 18, 18, 18)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6mxym")
+volume_db = 3.714
+bus = &"SFX"
+
+[node name="ChestArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChestArea"]
+shape = SubResource("CircleShape2D_4el03")

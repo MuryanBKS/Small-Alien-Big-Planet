@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://nipvqeilju6g"]
+
+[ext_resource type="Script" path="res://scenes/components/dialouge_trigger.gd" id="1_bp6dl"]
+
+[node name="DialougeTrigger" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_bp6dl")

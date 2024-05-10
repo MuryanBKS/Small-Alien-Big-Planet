@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://co4m7o6ounlsq"]
+
+[ext_resource type="Texture2D" uid="uid://bgjl3lkf526b5" path="res://assets/tilemap-characters_packed.png" id="1_cv2mf"]
+[ext_resource type="Script" path="res://scenes/characters/enemies/fly/fly_enemy.gd" id="1_vbol8"]
+[ext_resource type="PackedScene" uid="uid://b0ah1ke6tlhfl" path="res://scenes/components/killzone.tscn" id="3_8rk2u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51c5h"]
+atlas = ExtResource("1_cv2mf")
+region = Rect2(144, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvkwg"]
+atlas = ExtResource("1_cv2mf")
+region = Rect2(168, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojspu"]
+atlas = ExtResource("1_cv2mf")
+region = Rect2(192, 48, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wmvuk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51c5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvkwg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojspu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_limpq"]
+radius = 5.0
+
+[node name="FlyEnemy" type="Node2D"]
+scale = Vector2(1.2, 1.2)
+script = ExtResource("1_vbol8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wmvuk")
+autoplay = "default"
+frame_progress = 0.774129
+
+[node name="Killzone" parent="." instance=ExtResource("3_8rk2u")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_limpq")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

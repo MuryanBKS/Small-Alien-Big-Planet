@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://dutp4ompoiky5"]
+
+[ext_resource type="Script" path="res://scenes/characters/player/player.gd" id="1_c2l86"]
+[ext_resource type="Texture2D" uid="uid://bgjl3lkf526b5" path="res://assets/tilemap-characters_packed.png" id="2_hqlct"]
+[ext_resource type="AudioStream" uid="uid://crnxme8wjx4gp" path="res://assets/Explosion 9 - Sound effects Pack 2.mp3" id="3_nmfjy"]
+[ext_resource type="AudioStream" uid="uid://d0307fmwfsqa4" path="res://assets/Jump 1 - Sound effects Pack 2.mp3" id="4_oqqb3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83fna"]
+atlas = ExtResource("2_hqlct")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_di4l8"]
+atlas = ExtResource("2_hqlct")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkn7h"]
+atlas = ExtResource("2_hqlct")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3btry"]
+atlas = ExtResource("2_hqlct")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2rsv5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83fna")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_di4l8")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lkn7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3btry")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_icnad"]
+size = Vector2(10, 23)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 5
+collision_layer = 2
+script = ExtResource("1_c2l86")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_2rsv5")
+animation = &"run"
+frame_progress = 0.564501
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11.5)
+shape = SubResource("RectangleShape2D_icnad")
+
+[node name="DiedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nmfjy")
+volume_db = 10.0
+bus = &"SFX"
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_oqqb3")
+pitch_scale = 1.17
+bus = &"SFX"
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true

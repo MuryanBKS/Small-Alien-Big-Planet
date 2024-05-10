@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsl72d41exptk"]
+
+[ext_resource type="Texture2D" uid="uid://bgjl3lkf526b5" path="res://assets/tilemap-characters_packed.png" id="1_6djv2"]
+[ext_resource type="Script" path="res://scenes/characters/npcs/captain/npc_captain.gd" id="1_my8j8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdx3c"]
+size = Vector2(18, 23)
+
+[node name="NpcCaptain" type="Area2D"]
+script = ExtResource("1_my8j8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("1_6djv2")
+region_enabled = true
+region_rect = Rect2(0, 24, 24, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11.5)
+shape = SubResource("RectangleShape2D_fdx3c")

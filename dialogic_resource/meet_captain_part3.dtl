@@ -1,0 +1,29 @@
+captain: 不用這樣看我。
+captain: 我知道你要說什麼。
+captain: 身為隊長總是要走在最前面。
+player: 那可以記得帶上我嗎?
+player: (っ・Д・)っ
+captain: ( ^ω^)
+if {get_diamond} == true:
+	player: 隊長這是我剛剛發現的寶石。
+	captain: 這個是!
+	captain: 它的戰鬥......
+	player: 隊長這梗我剛剛玩過了。
+	captain: 好吧......
+captain: 對了，前面你跟我說的金幣。
+captain: 根據分析的結果。
+captain: 似乎是這顆星球早已滅亡的生物使用的貨幣。
+captain: 拿去賣給古董收藏家或許有不錯的價錢吧。
+captain: 你收集到幾枚?
+player: 我收集到{coin}枚金幣。
+if {coin} == 33:
+	captain: 真令我驚訝。
+	captain: 你好像把所有的金幣都收集完了。
+elif {coin} >= 20:
+	captain: 還不錯。
+	captain: 雖然還比不上我。
+else:
+	captain: 只收集到這些也是蠻厲害的。
+captain: 時間差不多了。
+captain: 走吧。
+[end_timeline]

@@ -1,0 +1,158 @@
+[gd_scene load_steps=11 format=3 uid="uid://ctf1vr6hrmng0"]
+
+[ext_resource type="Texture2D" uid="uid://dcms4cb4buwgw" path="res://assets/laserGreen2.png" id="1_6wu36"]
+[ext_resource type="Texture2D" uid="uid://cp6g4lbnyquhb" path="res://assets/shipGreen.png" id="1_8brs3"]
+[ext_resource type="Script" path="res://scenes/characters/player/ufo.gd" id="1_roct8"]
+[ext_resource type="Texture2D" uid="uid://bu5dwyfr6jjbd" path="res://assets/shipGreen_manned.png" id="2_krn11"]
+[ext_resource type="Texture2D" uid="uid://ddnd1ncy65vdt" path="res://assets/dome.png" id="4_386gf"]
+[ext_resource type="AudioStream" uid="uid://2rxr31oxr0fm" path="res://assets/Retro HiTech 08.wav" id="6_q4xf2"]
+
+[sub_resource type="Animation" id="Animation_8ihcm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 0.79)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UfoClosed:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x5abx"]
+resource_name = "hide_light"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.354, 0.79), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.8), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cvhc1"]
+resource_name = "land"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.354, 0.79)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UfoClosed:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ybp6"]
+_data = {
+"RESET": SubResource("Animation_8ihcm"),
+"hide_light": SubResource("Animation_x5abx"),
+"land": SubResource("Animation_cvhc1")
+}
+
+[node name="Ufo" type="Node2D"]
+script = ExtResource("1_roct8")
+
+[node name="Light" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, 13)
+scale = Vector2(1e-05, 0.79)
+texture = ExtResource("1_6wu36")
+centered = false
+offset = Vector2(-33.995, 0)
+
+[node name="UfoOpened" type="Sprite2D" parent="."]
+position = Vector2(0, 6.255)
+scale = Vector2(0.225, 0.225)
+texture = ExtResource("1_8brs3")
+
+[node name="UfoClosed" type="Sprite2D" parent="."]
+scale = Vector2(0.225, 0.225)
+texture = ExtResource("2_krn11")
+
+[node name="Dome" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+scale = Vector2(0.225, 0.225)
+texture = ExtResource("4_386gf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0ybp6")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_q4xf2")
+volume_db = -8.0
+pitch_scale = 1.22
+bus = &"SFX"

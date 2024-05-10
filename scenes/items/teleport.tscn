@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb5iv48wrsk1e"]
+
+[ext_resource type="Script" path="res://scenes/items/teleport.gd" id="1_q3ada"]
+[ext_resource type="AudioStream" uid="uid://ckafwxq4vkmlc" path="res://assets/Teleport 3 - Sound effects Pack 2.mp3" id="2_3d0xx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vhhr3"]
+
+[node name="Teleport" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_q3ada")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vhhr3")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_3d0xx")
+bus = &"SFX"

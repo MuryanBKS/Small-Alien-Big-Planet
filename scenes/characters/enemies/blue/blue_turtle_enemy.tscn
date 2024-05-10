@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://du7knln2f25bk"]
+
+[ext_resource type="Script" path="res://scenes/characters/enemies/blue/blue_turtle_enemy.gd" id="1_drtlp"]
+[ext_resource type="Texture2D" uid="uid://bgjl3lkf526b5" path="res://assets/tilemap-characters_packed.png" id="2_huyjn"]
+[ext_resource type="PackedScene" uid="uid://cb4uyrpoojypt" path="res://scenes/items/coin.tscn" id="3_i2274"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ap2s"]
+atlas = ExtResource("2_huyjn")
+region = Rect2(72, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qm0w"]
+atlas = ExtResource("2_huyjn")
+region = Rect2(96, 48, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r4qhl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ap2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qm0w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ur4po"]
+size = Vector2(24, 22)
+
+[node name="BlueTurtleEnemy" type="AnimatableBody2D"]
+scale = Vector2(1.2, 1.2)
+script = ExtResource("1_drtlp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_r4qhl")
+autoplay = "default"
+frame_progress = 0.399702
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(20, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(-20, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_ur4po")
+
+[node name="Coin" parent="." instance=ExtResource("3_i2274")]
+position = Vector2(0, -20.8333)

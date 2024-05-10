@@ -1,0 +1,10 @@
+player: 那塊寶石!
+player: 能量高到讓它浮在空中了。
+player: 應該就是這次的目標了。
+player: 還有前方通道被上鎖的箱子堵住了。
+if {get_key} == true:
+	player: 說起來我剛剛在樹上有撿到一把鑰匙。
+elif {get_key} == false:
+	player: 說起來我剛剛好像有在樹上看到一把鑰匙。
+player: 說不定能用在上面。
+[end_timeline]

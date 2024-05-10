@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsd6s60hu2xjy"]
+
+[ext_resource type="AudioStream" uid="uid://21gnu3fqbsuw" path="res://assets/Three Red Hearts - Princess Quest.ogg" id="1_85yin"]
+
+[node name="Music" type="AudioStreamPlayer"]
+stream = ExtResource("1_85yin")
+autoplay = true
+bus = &"Music"

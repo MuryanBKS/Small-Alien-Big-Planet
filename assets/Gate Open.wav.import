@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cn4m3xsw8hc62"
+path="res://.godot/imported/Gate Open.wav-09cda0e6a3e3250d39546340b8026b60.sample"
+
+[deps]
+
+source_file="res://assets/Gate Open.wav"
+dest_files=["res://.godot/imported/Gate Open.wav-09cda0e6a3e3250d39546340b8026b60.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
